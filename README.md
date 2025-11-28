@@ -2,7 +2,7 @@
 
 A Postman-like API testing web application built with React, TypeScript, and Tailwind CSS. Test REST APIs with an intuitive dark-themed interface.
 
-![API Tester Screenshot](https://lovable.dev/opengraph-image-p98pqg.png)
+![API Tester Screenshot](/public/thumbnail.png)
 
 ## Features
 
