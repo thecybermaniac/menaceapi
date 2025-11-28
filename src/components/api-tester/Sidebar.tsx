@@ -57,7 +57,7 @@ export function Sidebar({
   return (
     <div className="flex flex-col h-full bg-sidebar border-r border-sidebar-border">
       {/* Header */}
-      <div className="flex items-center gap-1.5 px-3 py-2.5 border-b border-sidebar-border">
+      <div className="flex items-center gap-1.5 px-3 py-4 border-b border-sidebar-border">
         <Clock className="h-3.5 w-3.5 text-sidebar-primary" />
         <span className="text-xs font-medium text-sidebar-primary">History</span>
       </div>
