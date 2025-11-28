@@ -1,5 +1,5 @@
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios';
-import type { RequestConfig, ResponseData, KeyValuePair } from '@/types/api';
+import type { RequestConfig, ResponseData, KeyValuePair, FormDataPair } from '@/types/api';
 
 // Convert key-value pairs to object (only enabled ones)
 function pairsToObject(pairs: KeyValuePair[]): Record<string, string> {
@@ -47,7 +47,11 @@ function prepareBody(
     config.formData
       .filter((pair) => pair.enabled && pair.key.trim())
       .forEach((pair) => {
-        formData.append(pair.key, pair.value);
+        if (pair.valueType === 'file' && pair.file) {
+          formData.append(pair.key, pair.file);
+        } else if (pair.valueType === 'text') {
+          formData.append(pair.key, pair.value);
+        }
       });
     return { data: formData, contentType: undefined }; // Let browser set content-type
   }

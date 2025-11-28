@@ -5,6 +5,7 @@ import type {
   RequestConfig,
   RequestTab,
   KeyValuePair,
+  FormDataPair,
   BodyType,
   RawBodyFormat,
 } from '@/types/api';
@@ -21,7 +22,7 @@ interface RequestPanelProps {
   onBodyTypeChange: (type: BodyType) => void;
   onRawBodyChange: (content: string) => void;
   onRawBodyFormatChange: (format: RawBodyFormat) => void;
-  onUpdateFormData: (id: string, updates: Partial<KeyValuePair>) => void;
+  onUpdateFormData: (id: string, updates: Partial<FormDataPair>) => void;
   onAddFormData: () => void;
   onRemoveFormData: (id: string) => void;
 }
