@@ -1,73 +1,147 @@
-# Welcome to your Lovable project
+# API Tester
 
-## Project info
+A Postman-like API testing web application built with React, TypeScript, and Tailwind CSS. Test REST APIs with an intuitive dark-themed interface.
 
-**URL**: https://lovable.dev/projects/686f6ad7-ceb8-4222-924e-84cfaad3a699
+![API Tester Screenshot](https://lovable.dev/opengraph-image-p98pqg.png)
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+### Request Building
+- **HTTP Methods**: GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD
+- **URL Input**: Enter any API endpoint with Enter key support
+- **Query Parameters**: Key-value table with enable/disable toggles
+- **Headers**: Custom headers with enable/disable toggles
+- **Request Body**:
+  - None (no body)
+  - Raw (Text or JSON with Monaco Editor)
+  - Form-data (key-value pairs)
 
-**Use Lovable**
+### Response Viewer
+- **Status Display**: Color-coded HTTP status codes
+- **Response Time**: Millisecond precision timing
+- **Response Size**: Formatted size display
+- **Body Viewer**: Pretty-printed JSON with syntax highlighting via Monaco Editor
+- **Headers Tab**: View all response headers
+- **Cookies Tab**: View response cookies
+- **Copy Button**: One-click copy response body
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/686f6ad7-ceb8-4222-924e-84cfaad3a699) and start prompting.
+### Console
+- **Request Logging**: Method, URL, headers, and body
+- **Response Logging**: Status, timing, and size
+- **Error Logging**: Network errors and timeouts
+- **Expandable Entries**: Click to view full details
+- **Clear Function**: Reset console output
 
-Changes made via Lovable will be committed automatically to this repo.
+### History
+- **Auto-Save**: Requests automatically saved to localStorage
+- **Quick Load**: Click to restore previous requests
+- **Status Preview**: See response status at a glance
+- **Delete**: Remove individual history entries
+- **Clear All**: Reset entire history
 
-**Use your preferred IDE**
+### UI Features
+- **Dark Theme**: Professional Postman-inspired dark mode
+- **Resizable Panels**: Drag to resize request, response, and console panels
+- **Method Colors**: Color-coded HTTP methods (GET=green, POST=yellow, etc.)
+- **Monaco Editor**: Syntax highlighting, formatting, and error detection for JSON
+- **Keyboard Shortcuts**: Enter to send, Ctrl+Shift+F to format JSON
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Tech Stack
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **React 18** with Hooks
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **Monaco Editor** (lazy-loaded) for JSON editing
+- **Axios** for HTTP requests
+- **shadcn/ui** for UI components
+- **Vite** for development and building
 
-Follow these steps:
+## Getting Started
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+### Prerequisites
+- Node.js 18+ 
+- npm or bun
+
+### Installation
+
+```bash
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
+# Navigate to project directory
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Install dependencies
+npm install
+# or
+bun install
 ```
 
-**Edit a file directly in GitHub**
+### Development
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+# Start development server
+npm run dev
+# or
+bun run dev
+```
 
-**Use GitHub Codespaces**
+Open [http://localhost:8080](http://localhost:8080) in your browser.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Build
 
-## What technologies are used for this project?
+```bash
+# Create production build
+npm run build
+# or
+bun run build
 
-This project is built with:
+# Preview production build
+npm run preview
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Project Structure
 
-## How can I deploy this project?
+```
+src/
+├── components/
+│   └── api-tester/
+│       ├── ApiTester.tsx      # Main container component
+│       ├── RequestBar.tsx     # URL input and send button
+│       ├── MethodSelector.tsx # HTTP method dropdown
+│       ├── RequestPanel.tsx   # Tabs for params/headers/body
+│       ├── KeyValueTable.tsx  # Reusable key-value editor
+│       ├── BodyEditor.tsx     # Body type selection and editing
+│       ├── ResponsePanel.tsx  # Response display with tabs
+│       ├── Console.tsx        # Request/response logging
+│       └── Sidebar.tsx        # Collections and history
+├── hooks/
+│   ├── useRequestState.ts     # Request state management
+│   ├── useConsole.ts          # Console logging logic
+│   └── useHistory.ts          # History with localStorage
+├── lib/
+│   └── apiClient.ts           # HTTP request execution
+├── types/
+│   └── api.ts                 # TypeScript interfaces
+└── pages/
+    └── Index.tsx              # Main page
+```
 
-Simply open [Lovable](https://lovable.dev/projects/686f6ad7-ceb8-4222-924e-84cfaad3a699) and click on Share -> Publish.
+## Usage Tips
 
-## Can I connect a custom domain to my Lovable project?
+1. **Testing Public APIs**: Try `https://jsonplaceholder.typicode.com/posts` for a quick test
+2. **Adding Headers**: Use the Headers tab to add Authorization, Content-Type, etc.
+3. **JSON Body**: Select "raw" then "JSON" for the Monaco editor with formatting
+4. **Format JSON**: Click the "Format" button or use Ctrl+Shift+F in the editor
+5. **Query Params**: Use the Params tab - they'll be automatically appended to the URL
 
-Yes, you can!
+## CORS Note
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+When testing APIs from the browser, you may encounter CORS restrictions. Solutions:
+- Use APIs that support CORS
+- Use a CORS proxy for testing
+- Test against your own backend with CORS enabled
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## License
+
+MIT
