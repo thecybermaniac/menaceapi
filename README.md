@@ -100,33 +100,6 @@ bun run build
 npm run preview
 ```
 
-## Project Structure
-
-```
-src/
-├── components/
-│   └── api-tester/
-│       ├── ApiTester.tsx      # Main container component
-│       ├── RequestBar.tsx     # URL input and send button
-│       ├── MethodSelector.tsx # HTTP method dropdown
-│       ├── RequestPanel.tsx   # Tabs for params/headers/body
-│       ├── KeyValueTable.tsx  # Reusable key-value editor
-│       ├── BodyEditor.tsx     # Body type selection and editing
-│       ├── ResponsePanel.tsx  # Response display with tabs
-│       ├── Console.tsx        # Request/response logging
-│       └── Sidebar.tsx        # Collections and history
-├── hooks/
-│   ├── useRequestState.ts     # Request state management
-│   ├── useConsole.ts          # Console logging logic
-│   └── useHistory.ts          # History with localStorage
-├── lib/
-│   └── apiClient.ts           # HTTP request execution
-├── types/
-│   └── api.ts                 # TypeScript interfaces
-└── pages/
-    └── Index.tsx              # Main page
-```
-
 ## Usage Tips
 
 1. **Testing Public APIs**: Try `https://jsonplaceholder.typicode.com/posts` for a quick test
