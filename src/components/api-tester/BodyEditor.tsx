@@ -73,7 +73,7 @@ export function BodyEditor({
                   bodyType === type ? 'text-foreground' : 'text-muted-foreground'
                 )}
               >
-                {type === 'none' ? 'none' : type === 'raw' ? 'raw' : 'form-data'}
+                {type === 'none' ? 'None' : type === 'raw' ? 'Raw' : 'Form Data'}
               </span>
             </label>
           ))}
