@@ -97,7 +97,7 @@ export function ApiTester() {
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
-      <div className="w-64 flex-shrink-0">
+      <div className="w-72 flex-shrink-0">
         <Sidebar
           history={history}
           onSelectHistory={handleSelectHistory}
