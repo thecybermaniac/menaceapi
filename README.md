@@ -1,6 +1,6 @@
 # Menace API
 
-A Postman-like API testing web application built with React, TypeScript, and Tailwind CSS. Test REST APIs with an intuitive dark-themed interface. Vist site ![here](https://menaceapi.vercel.app/)
+A Postman-like API testing web application built with React, TypeScript, and Tailwind CSS. Test REST APIs with an intuitive dark-themed interface. Visit site [here](https://menaceapi.vercel.app/)
 
 ![API Tester Screenshot](/public/thumbnail.png)
 
