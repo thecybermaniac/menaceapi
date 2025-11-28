@@ -8,9 +8,9 @@ import {
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { KeyValueTable } from './KeyValueTable';
+import { FormDataTable } from './FormDataTable';
 import { Wand2 } from 'lucide-react';
-import type { BodyType, RawBodyFormat, KeyValuePair } from '@/types/api';
+import type { BodyType, RawBodyFormat, FormDataPair } from '@/types/api';
 import { cn } from '@/lib/utils';
 
 // Lazy load Monaco Editor for performance
@@ -20,11 +20,11 @@ interface BodyEditorProps {
   bodyType: BodyType;
   rawBody: string;
   rawBodyFormat: RawBodyFormat;
-  formData: KeyValuePair[];
+  formData: FormDataPair[];
   onBodyTypeChange: (type: BodyType) => void;
   onRawBodyChange: (content: string) => void;
   onRawBodyFormatChange: (format: RawBodyFormat) => void;
-  onFormDataUpdate: (id: string, updates: Partial<KeyValuePair>) => void;
+  onFormDataUpdate: (id: string, updates: Partial<FormDataPair>) => void;
   onFormDataAdd: () => void;
   onFormDataRemove: (id: string) => void;
 }
@@ -159,13 +159,11 @@ export function BodyEditor({
         )}
 
         {bodyType === 'form-data' && (
-          <KeyValueTable
+          <FormDataTable
             pairs={formData}
             onUpdate={onFormDataUpdate}
             onAdd={onFormDataAdd}
             onRemove={onFormDataRemove}
-            keyPlaceholder="Key"
-            valuePlaceholder="Value"
           />
         )}
       </div>

@@ -13,6 +13,19 @@ export interface KeyValuePair {
   enabled: boolean;
 }
 
+// Form data value type
+export type FormDataValueType = 'text' | 'file';
+
+// Form data pair with file support
+export interface FormDataPair {
+  id: string;
+  key: string;
+  value: string;
+  valueType: FormDataValueType;
+  file: File | null;
+  enabled: boolean;
+}
+
 // Request configuration
 export interface RequestConfig {
   method: HttpMethod;
@@ -22,7 +35,7 @@ export interface RequestConfig {
   bodyType: BodyType;
   rawBody: string;
   rawBodyFormat: RawBodyFormat;
-  formData: KeyValuePair[];
+  formData: FormDataPair[];
 }
 
 // Response data structure

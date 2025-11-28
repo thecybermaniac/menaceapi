@@ -26,6 +26,9 @@ export function ApiTester() {
     updateKeyValuePair,
     addKeyValuePair,
     removeKeyValuePair,
+    updateFormDataPair,
+    addFormDataPair,
+    removeFormDataPair,
     loadRequest,
   } = useRequestState();
 
@@ -140,11 +143,9 @@ export function ApiTester() {
                     onBodyTypeChange={setBodyType}
                     onRawBodyChange={setRawBody}
                     onRawBodyFormatChange={setRawBodyFormat}
-                    onUpdateFormData={(id, updates) =>
-                      updateKeyValuePair('formData', id, updates)
-                    }
-                    onAddFormData={() => addKeyValuePair('formData')}
-                    onRemoveFormData={(id) => removeKeyValuePair('formData', id)}
+                    onUpdateFormData={updateFormDataPair}
+                    onAddFormData={addFormDataPair}
+                    onRemoveFormData={removeFormDataPair}
                   />
                 </div>
               </ResizablePanel>

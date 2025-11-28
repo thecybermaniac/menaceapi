@@ -5,6 +5,7 @@ import type {
   BodyType,
   RawBodyFormat,
   KeyValuePair,
+  FormDataPair,
 } from '@/types/api';
 
 // Generate a simple unique ID
@@ -18,6 +19,16 @@ const createEmptyPair = (): KeyValuePair => ({
   enabled: true,
 });
 
+// Create an empty form data pair
+const createEmptyFormDataPair = (): FormDataPair => ({
+  id: generateId(),
+  key: '',
+  value: '',
+  valueType: 'text',
+  file: null,
+  enabled: true,
+});
+
 // Initial request state
 const initialRequest: RequestConfig = {
   method: 'GET',
@@ -27,7 +38,7 @@ const initialRequest: RequestConfig = {
   bodyType: 'none',
   rawBody: '',
   rawBodyFormat: 'json',
-  formData: [createEmptyPair()],
+  formData: [createEmptyFormDataPair()],
 };
 
 export function useRequestState() {
@@ -61,7 +72,7 @@ export function useRequestState() {
   // Generic function to update key-value pairs
   const updateKeyValuePair = useCallback(
     (
-      field: 'params' | 'headers' | 'formData',
+      field: 'params' | 'headers',
       id: string,
       updates: Partial<KeyValuePair>
     ) => {
@@ -77,7 +88,7 @@ export function useRequestState() {
 
   // Add a new key-value pair
   const addKeyValuePair = useCallback(
-    (field: 'params' | 'headers' | 'formData') => {
+    (field: 'params' | 'headers') => {
       setRequest((prev) => ({
         ...prev,
         [field]: [...prev[field], createEmptyPair()],
@@ -88,7 +99,7 @@ export function useRequestState() {
 
   // Remove a key-value pair
   const removeKeyValuePair = useCallback(
-    (field: 'params' | 'headers' | 'formData', id: string) => {
+    (field: 'params' | 'headers', id: string) => {
       setRequest((prev) => {
         const filtered = prev[field].filter((pair) => pair.id !== id);
         // Always keep at least one empty row
@@ -100,6 +111,38 @@ export function useRequestState() {
     },
     []
   );
+
+  // Update form data pair
+  const updateFormDataPair = useCallback(
+    (id: string, updates: Partial<FormDataPair>) => {
+      setRequest((prev) => ({
+        ...prev,
+        formData: prev.formData.map((pair) =>
+          pair.id === id ? { ...pair, ...updates } : pair
+        ),
+      }));
+    },
+    []
+  );
+
+  // Add a new form data pair
+  const addFormDataPair = useCallback(() => {
+    setRequest((prev) => ({
+      ...prev,
+      formData: [...prev.formData, createEmptyFormDataPair()],
+    }));
+  }, []);
+
+  // Remove a form data pair
+  const removeFormDataPair = useCallback((id: string) => {
+    setRequest((prev) => {
+      const filtered = prev.formData.filter((pair) => pair.id !== id);
+      return {
+        ...prev,
+        formData: filtered.length === 0 ? [createEmptyFormDataPair()] : filtered,
+      };
+    });
+  }, []);
 
   // Reset request to initial state
   const resetRequest = useCallback(() => {
@@ -121,6 +164,9 @@ export function useRequestState() {
     updateKeyValuePair,
     addKeyValuePair,
     removeKeyValuePair,
+    updateFormDataPair,
+    addFormDataPair,
+    removeFormDataPair,
     resetRequest,
     loadRequest,
   };
