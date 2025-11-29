@@ -4,6 +4,7 @@ import { RequestPanel } from './RequestPanel';
 import { ResponsePanel } from './ResponsePanel';
 import { Console } from './Console';
 import { Sidebar } from './Sidebar';
+import { ProfileButton } from './ProfileButton';
 import { useRequestState } from '@/hooks/useRequestState';
 import { useConsole } from '@/hooks/useConsole';
 import { useHistory } from '@/hooks/useHistory';
@@ -14,6 +15,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from '@/components/ui/resizable';
+import { Zap } from 'lucide-react';
 
 export function ApiTester() {
   const {
@@ -110,14 +112,28 @@ export function ApiTester() {
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header with request bar */}
         <div className="flex-shrink-0 p-4 border-b border-border">
-          <RequestBar
-            method={request.method}
-            url={request.url}
-            isLoading={isLoading}
-            onMethodChange={setMethod}
-            onUrlChange={setUrl}
-            onSend={handleSend}
-          />
+          <div className="flex items-center gap-4">
+            {/* Logo */}
+            <div className="flex items-center gap-2 pr-4 border-r border-border">
+              <Zap className="w-5 h-5 text-primary" />
+              <span className="font-semibold text-foreground">Menace API</span>
+            </div>
+
+            {/* Request bar */}
+            <div className="flex-1">
+              <RequestBar
+                method={request.method}
+                url={request.url}
+                isLoading={isLoading}
+                onMethodChange={setMethod}
+                onUrlChange={setUrl}
+                onSend={handleSend}
+              />
+            </div>
+
+            {/* Profile button */}
+            <ProfileButton />
+          </div>
         </div>
 
         {/* Main panels */}
