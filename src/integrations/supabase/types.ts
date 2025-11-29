@@ -14,7 +14,99 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      request_history: {
+        Row: {
+          body_type: string | null
+          created_at: string
+          form_data: Json | null
+          headers: Json | null
+          id: string
+          method: string
+          params: Json | null
+          raw_body: string | null
+          raw_body_format: string | null
+          response_body: string | null
+          response_error: string | null
+          response_headers: Json | null
+          response_size: number | null
+          response_status: number | null
+          response_status_text: string | null
+          response_time: number | null
+          url: string
+          user_id: string
+        }
+        Insert: {
+          body_type?: string | null
+          created_at?: string
+          form_data?: Json | null
+          headers?: Json | null
+          id?: string
+          method: string
+          params?: Json | null
+          raw_body?: string | null
+          raw_body_format?: string | null
+          response_body?: string | null
+          response_error?: string | null
+          response_headers?: Json | null
+          response_size?: number | null
+          response_status?: number | null
+          response_status_text?: string | null
+          response_time?: number | null
+          url: string
+          user_id: string
+        }
+        Update: {
+          body_type?: string | null
+          created_at?: string
+          form_data?: Json | null
+          headers?: Json | null
+          id?: string
+          method?: string
+          params?: Json | null
+          raw_body?: string | null
+          raw_body_format?: string | null
+          response_body?: string | null
+          response_error?: string | null
+          response_headers?: Json | null
+          response_size?: number | null
+          response_status?: number | null
+          response_status_text?: string | null
+          response_time?: number | null
+          url?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
