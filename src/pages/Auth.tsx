@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Github, Mail, Lock, User, Loader2, Zap } from 'lucide-react';
 import authSidebar from '@/assets/auth-sidebar.jpg';
+import logo from '@/assets/logo.png';
 
 type AuthMode = 'signin' | 'signup';
 
@@ -83,10 +84,6 @@ const Auth = () => {
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Zap className="w-8 h-8 text-primary" />
-              <span className="text-2xl font-bold text-foreground">Menace API</span>
-            </div>
             <h2 className="text-3xl font-bold text-foreground">
               {mode === 'signin' ? 'Welcome back' : 'Create an account'}
             </h2>
@@ -215,26 +212,12 @@ const Auth = () => {
         <div className="relative z-10 flex flex-col justify-end p-12 text-white">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <Zap className="w-10 h-10 text-primary" />
+              <img src={logo} alt="Menace API Logo" className="w-10 h-10 text-primary" />
               <span className="text-3xl font-bold">Menace API</span>
             </div>
             <p className="text-lg text-white/80 max-w-md">
               A powerful API testing tool designed for developers. Test, debug, and document your APIs with ease.
             </p>
-            <div className="flex gap-6 pt-4">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">REST</div>
-                <div className="text-sm text-white/60">APIs</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">Real-time</div>
-                <div className="text-sm text-white/60">Console</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">History</div>
-                <div className="text-sm text-white/60">Tracking</div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

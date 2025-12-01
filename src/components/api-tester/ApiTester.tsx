@@ -16,6 +16,7 @@ import {
   ResizablePanelGroup,
 } from '@/components/ui/resizable';
 import { Zap } from 'lucide-react';
+import logo from '@/assets/logo.png';
 
 export function ApiTester() {
   const {
@@ -115,8 +116,7 @@ export function ApiTester() {
           <div className="flex items-center gap-4">
             {/* Logo */}
             <div className="flex items-center gap-2 pr-4 border-r border-border">
-              <Zap className="w-5 h-5 text-primary" />
-              <span className="font-semibold text-foreground">Menace API</span>
+              <img src={logo} alt="Menace API Logo" className="w-8 h-8" />
             </div>
 
             {/* Request bar */}
