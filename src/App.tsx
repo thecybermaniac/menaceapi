@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import AccessBlocked from "./pages/AccessBlocked";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { useDeviceDetect } from "./hooks/useDeviceDetect";
@@ -68,6 +69,7 @@ const AppContent = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
