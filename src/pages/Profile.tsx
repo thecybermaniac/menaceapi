@@ -35,24 +35,15 @@ import {
   Shield,
 } from "lucide-react";
 import { getInitials } from "@/lib/utils";
-
-interface Profile {
-  id: string;
-  user_id: string;
-  email: string | null;
-  full_name: string | null;
-  avatar_url: string | null;
-  created_at: string;
-}
+import useProfile from "@/hooks/useProfile";
 
 const Profile = () => {
   const { user, signOut } = useAuth();
+  const { profile, setProfile, fullName, setFullName, loading, setLoading } =
+    useProfile(user);
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
-  const [fullName, setFullName] = useState("");
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -145,7 +136,11 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-7xl mx-auto space-y-6">
-        <Button variant="outline" onClick={() => navigate("/")} className="mb-4">
+        <Button
+          variant="outline"
+          onClick={() => navigate("/")}
+          className="mb-4"
+        >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Dashboard
         </Button>
@@ -155,7 +150,7 @@ const Profile = () => {
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
                 <Avatar className="w-24 h-24">
-                  <AvatarImage src={profile?.avatar_url || undefined} />
+                  <AvatarImage src={user.user_metadata?.avatar_url} />
                   <AvatarFallback className="text-2xl bg-primary text-primary-foreground">
                     {getInitials(
                       profile?.full_name || null,
