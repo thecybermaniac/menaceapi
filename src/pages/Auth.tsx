@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Mail, Lock, User, Loader2 } from 'lucide-react';
+import { Mail, Lock, User, Loader2, ArrowLeft } from 'lucide-react';
 import authSidebar from '@/assets/auth-sidebar.jpg';
 import logo from '@/assets/logo.png';
 
-type AuthMode = 'signin' | 'signup';
+type AuthMode = 'signin' | 'signup' | 'forgot';
 
 const Auth = () => {
   const [mode, setMode] = useState<AuthMode>('signin');
@@ -28,6 +29,33 @@ const Auth = () => {
     }
   }, [user, navigate]);
 
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      
+      if (error) {
+        toast({
+          variant: 'destructive',
+          title: 'Request failed',
+          description: error.message,
+        });
+      } else {
+        toast({
+          title: 'Check your email',
+          description: 'We sent you a password reset link.',
+        });
+        setMode('signin');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -44,7 +72,7 @@ const Auth = () => {
         } else {
           navigate('/');
         }
-      } else {
+      } else if (mode === 'signup') {
         const { error } = await signUp(email, password, fullName);
         if (error) {
           toast({
@@ -65,6 +93,77 @@ const Auth = () => {
     }
   };
 
+
+  // Forgot password form
+  if (mode === 'forgot') {
+    return (
+      <div className="min-h-screen flex bg-background">
+        <div className="flex-1 flex items-center justify-center p-8">
+          <div className="w-full max-w-md space-y-8">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-foreground">Reset password</h2>
+              <p className="mt-2 text-muted-foreground">
+                Enter your email and we'll send you a reset link
+              </p>
+            </div>
+
+            <form onSubmit={handleForgotPassword} className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                Send reset link
+              </Button>
+            </form>
+
+            <button
+              type="button"
+              onClick={() => setMode('signin')}
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mx-auto"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to sign in
+            </button>
+          </div>
+        </div>
+
+        {/* Right side - Image Sidebar */}
+        <div className="hidden lg:flex lg:w-[45%] relative">
+          <img
+            src={authSidebar}
+            alt="Auth background"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent" />
+          <div className="relative z-10 flex flex-col justify-end p-12 text-white">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <img src={logo} alt="Menace API Logo" className="w-10 h-10" />
+                <span className="text-3xl font-bold">Menace API</span>
+              </div>
+              <p className="text-lg text-white/80 max-w-md">
+                A powerful API testing tool designed for developers. Test, debug, and document your APIs with ease.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex bg-background">
@@ -117,7 +216,18 @@ const Auth = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password">Password</Label>
+                {mode === 'signin' && (
+                  <button
+                    type="button"
+                    onClick={() => setMode('forgot')}
+                    className="text-sm text-primary hover:underline"
+                  >
+                    Forgot password?
+                  </button>
+                )}
+              </div>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
