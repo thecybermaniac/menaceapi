@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -213,6 +213,13 @@ const Auth = () => {
                 </button>
               </>
             )}
+          </p>
+
+          <p className="text-center text-xs text-muted-foreground">
+            By continuing, you agree to our{' '}
+            <Link to="/privacy" className="text-primary hover:underline">
+              Privacy Policy
+            </Link>
           </p>
         </div>
       </div>
