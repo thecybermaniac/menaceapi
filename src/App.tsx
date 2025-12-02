@@ -9,6 +9,7 @@ import AccessBlocked from "./pages/AccessBlocked";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ResetPassword from "./pages/ResetPassword";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { useDeviceDetect } from "./hooks/useDeviceDetect";
@@ -70,6 +71,7 @@ const AppContent = () => {
           }
         />
         <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
